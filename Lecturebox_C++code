@@ -1,0 +1,123 @@
+Tinkercad url :
+https://www.tinkercad.com/login?next=%2Fthings%2F64CTawndzjB-epic-rottis-stantia%2Feditel%3Fsharecode%3D3G5VARsV9kv6AcsjbC0laZcGeDfR_hi5T-SJP-loIL0
+
+Arduino Uno R3 1 code :
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+
+void setup()
+{
+  lcd.begin(16, 2);
+  lcd.print("2021/11/05");
+  pinMode(8, OUTPUT);//피에조
+  pinMode(10, INPUT);//붉은색 LED
+  pinMode(7, INPUT);//주황색 LED
+ 
+}
+
+void loop()
+{
+  lcd.setCursor(0, 1);
+  lcd.print("AM 9:0");        
+  lcd.print(millis()/1000);
+  
+  
+  if (digitalRead(7) == 1) {
+    Serial.println(digitalRead(13));
+    lcd.begin(16, 2);
+    lcd.print("Warning!!!");
+    tone(8, 523, 1000);
+    delay(1000);
+    lcd.begin(16, 2);
+    lcd.print("2021/11/05");
+  } 
+  else if (digitalRead(10) == 1) {
+    lcd.begin(16, 2);
+    lcd.print("counted!!!");
+    tone(8, 523, 1000);
+    delay(1000);
+    lcd.begin(16, 2);
+    lcd.print("2021/11/05");
+  } 
+  else {  lcd.setCursor(0, 1);
+  lcd.print("AM 9:0");        
+  lcd.print(millis()/1000);
+  }
+}
+
+Arduino Uno R3 2 code :
+// C++ code
+//
+void setup()
+{
+  pinMode(7, INPUT);
+  pinMode(8, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(4, INPUT);
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  if (digitalRead(7) == 0) {
+    digitalWrite(8, LOW);
+    digitalWrite(12, HIGH);
+    digitalWrite(10, LOW);
+    delay(1000); // Wait for 1000 millisecond(s)
+    if (digitalRead(7) == 0) {
+      digitalWrite(8, LOW);
+      digitalWrite(12, HIGH);
+      digitalWrite(10, LOW);
+      if (digitalRead(7) == 0) {
+        digitalWrite(8, LOW);
+        digitalWrite(12, HIGH);
+        digitalWrite(10, LOW);
+        delay(1000); // Wait for 1000 millisecond(s)
+        if (digitalRead(7) == 0) {
+          digitalWrite(8, LOW);
+          digitalWrite(12, HIGH);
+          digitalWrite(10, LOW);
+          delay(1000); // Wait for 1000 millisecond(s)
+          if (digitalRead(7) == 0) {
+            digitalWrite(8, HIGH);
+            digitalWrite(12, LOW);
+            digitalWrite(10, LOW);
+            delay(3000); // Wait for 3000 millisecond(s)
+          } else {
+            digitalWrite(8, HIGH);
+            digitalWrite(12, LOW);
+            digitalWrite(10, LOW);
+          }
+        } else {
+          digitalWrite(8, LOW);
+          digitalWrite(12, LOW);
+          digitalWrite(10, HIGH);
+        }
+      } else {
+        digitalWrite(8, LOW);
+        digitalWrite(12, LOW);
+        digitalWrite(10, HIGH);
+      }
+    } else {
+      digitalWrite(8, LOW);
+      digitalWrite(12, LOW);
+      digitalWrite(10, HIGH);
+    }
+  } else {
+    digitalWrite(8, LOW);
+    digitalWrite(12, LOW);
+    digitalWrite(10, HIGH);
+  }
+
+  if (digitalRead(4) == 1) {
+    Serial.println(digitalRead(7));
+  } else {
+    digitalWrite(8, LOW);
+    digitalWrite(12, LOW);
+    digitalWrite(10, LOW);
+  }
+}
